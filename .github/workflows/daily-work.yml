@@ -1,0 +1,34 @@
+name: Daily Dot Toggler
+
+on:
+  schedule:
+    # UTC 기준 00:00 (한국 시간 오전 9:00)
+    - cron: '0 0 * * *'
+  # 수동으로 테스트해볼 수 있게 버튼 추가
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 스크립트 실행 (마침표 토글)
+        run: python update.py
+
+      - name: 변경사항 커밋 및 푸시
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Daily update: Toggle dot"
+          git push

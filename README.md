@@ -12,4 +12,4 @@ This repository runs a GitHub Action every day to keep my contribution graph gre
 1. Checks the end of this file.
 2. If there is a dot (`.`), it **deletes** it.
 3. If there is no dot, it **adds** one.
-4. **Profit!** 📈
+4. **Profit!** 📈.
